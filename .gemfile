@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :rake, :test do
-  gem 'puppetlabs_spec_helper', '>=0.8.2', :require => false
+  gem 'puppetlabs_spec_helper', '~> 7.0', :require => false
   gem 'puppet-blacksmith',       :require => false
   gem 'beaker',                  :require => false
   gem 'beaker-rspec',            :require => false
@@ -12,7 +12,7 @@ group :rake do
   gem 'rake',         '>=0.9.2.2'
   gem 'puppet-lint',  '>=1.0.1'
   gem 'puppet-syntax', 		 :require => false
-  gem 'metadata-json-lint', 	 :require => false
+  gem 'metadata-json-lint',  '~> 4.0',	 :require => false
 end
 
 if puppetversion = ENV['PUPPET_GEM_VERSION']

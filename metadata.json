@@ -10,8 +10,15 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.0 < 9.0.0"
+      "version_requirement": ">= 9.6.0 < 10.0.0"
     }
+  ],
+  "description": "Manage OpenDKIM installation and configuration with Puppet.",
+  "tags": [
+    "dkim",
+    "opendkim",
+    "mail",
+    "smtp"
   ],
   "operatingsystem_support": [
     {
@@ -62,13 +69,6 @@
       "name": "puppet",
       "version_requirement": ">= 4.8.0 < 7.0.0"
     }
-  ],
-  "description": "Manage OpenDKIM installation and configuration with Puppet.",
-  "tags": [
-    "dkim",
-    "opendkim",
-    "mail",
-    "smtp"
   ],
   "pdk-version": "3.2.0",
   "template-url": "pdk-default#3.2.0",
