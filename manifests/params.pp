@@ -1,3 +1,6 @@
+# @summary 
+#   The Class: opendkim::params class is defining parameters for postfix mail server opendkim module 
+# == 
 class opendkim::params {
   $uid = -1
   $gid = -1

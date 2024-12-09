@@ -1,3 +1,6 @@
+# @summary 
+#   The Class: opendkim::user class is defining user for postfix mail server opendkim module 
+# == 
 class opendkim::user inherits opendkim {
   if $opendkim::gid > -1 {
     group { 'opendkim':
@@ -12,7 +15,7 @@ class opendkim::user inherits opendkim {
     }
   }
 
-  $shelluser = $::osfamily ? {
+  $shelluser = $facts['os']['family'] ? {
     'RedHat' => '/sbin/nologin',
     default  => '/usr/sbin/nologin',
   }
@@ -36,7 +39,6 @@ class opendkim::user inherits opendkim {
       shell    => $shelluser,
       uid      => $opendkim::uid,
     }
-
   } elsif $opendkim::gid > -1 {
     user { 'opendkim':
       ensure   => 'present',
@@ -46,7 +48,6 @@ class opendkim::user inherits opendkim {
       password => '!!',
       shell    => $shelluser,
     }
-
   } else {
     user { 'opendkim':
       ensure   => 'present',
