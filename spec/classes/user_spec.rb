@@ -9,6 +9,7 @@ describe 'opendkim::user' do
           "class {'opendkim::params':}",
         ]
       end
+
       it { is_expected.to compile }
       it { is_expected.to contain_User('opendkim') }
       it { is_expected.to contain_Group('opendkim') }

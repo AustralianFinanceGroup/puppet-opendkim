@@ -9,6 +9,7 @@ describe 'opendkim' do
           "class {'opendkim::params':}",
         ]
       end
+
       it { is_expected.to compile }
     end
   end
