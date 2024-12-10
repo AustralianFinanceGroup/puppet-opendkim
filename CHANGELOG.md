@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* 
-
+* New test case files config,install,opendkim,service, user spec has been developed and added . 
+* Workflow file test.yaml has been added as part of the pe2023 update.
 
 ### Changed
 
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated .gitignore to exclude .cache .pdk and .vscode
 * updated the metadata dependencies into metadata
 * anchors has been changed from the init.pp file into the contain function to overcome the warning from the validations.
-* 
+* OS facts has been change from debian to CentOS and RedHat.
 
 ### Removed
 * .gemfile has been removed as got an validation error that should remove the either one of them as got another gemfile. 
