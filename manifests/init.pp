@@ -1,40 +1,77 @@
-# @summary 
-#   The Class: opendkim class is for opendkim module for postfix mail server 
-# == 
+# @summary
+#   The Class: opendkim class is for the opendkim module for the postfix mail server. This class manages the opendkim service.
 #
-#This class manages the opendkim service.
-# @param $user opendkim user defnition
-# @param $group opendkim group for the user
-# @param $uid opendkim unix id
-# @param $gid opendkim unix id group
-# @param $homedir home directory
-# @param $configdir config directory
-# @param $configfile configfile of the opendkim 
-# @param $pidfile process file of the opendkim 
-# @param $sysconfigfile system configuration file defenitions
-# @param $package_name linux/system package names
-# @param $log_why logging
-# @param $subdomains domain directories
-# @param $socket socket used in the system
-# @param $umask umask values
-# @param $nameservers dns servers names 
-# @param $trusted_hosts allowed or trusted hosts name lists
-# @param $mode 
-# @param $canonicalization the process of converting an email's headers and body into a standard form
-# @param $removeoldsignatures  removing old DKIM signatures
-# @param $maximum_signed_bytes signed by DKIM 
-# @param $senderheaders sender headers informatoions
-# @param $manage_private_keys private keys of trusted host
-# @param $alldomain was the domain to be used when generating the signature
-# @param $selector was the selector to be used when generating the signature
-# @param $publickey The public key DNS record should appear as a TXT resource record
-# @param $publickeyextended The public key DNS record should appear as a TXT resource record
-# @param $privatekey  Generating a private and public key pair for use when signing your mail
-# @param $hash_algorithms encrypt algorithm
-# @param $signaturealgorithm signature of the algorithm
-# @param $minimumkeybits restrition of the minimum bits required
-# @api private
-#Please see the README.md
+# @param user
+#   The opendkim user definition.
+# @param group
+#   The opendkim group for the user.
+# @param uid
+#   The opendkim Unix ID.
+# @param gid
+#   The opendkim Unix ID group.
+# @param homedir
+#   The home directory.
+# @param configdir
+#   The configuration directory.
+# @param configfile
+#   The configuration file of opendkim.
+# @param pidfile
+#   The process file of opendkim.
+# @param sysconfigfile
+#   The system configuration file definitions.
+# @param package_name
+#   The Linux/system package names.
+# @param log_why
+#   The logging configuration.
+# @param subdomains
+#   The domain directories.
+# @param socket
+#   The socket used in the system.
+# @param umask
+#   The umask values.
+# @param nameservers
+#   The DNS server names.
+# @param trusted_hosts
+#   The list of allowed or trusted hosts.
+# @param mode
+#   The mode of operation.
+# @param canonicalization
+#   The process of converting an email's headers and body into a standard form.
+# @param removeoldsignatures
+#   Whether to remove old DKIM signatures.
+# @param maximum_signed_bytes
+#   The maximum bytes signed by DKIM.
+# @param senderheaders
+#   The sender headers information.
+# @param manage_private_keys
+#   Whether to manage private keys of trusted hosts.
+# @param alldomain
+#   Whether the domain is to be used when generating the signature.
+# @param selector
+#   The selector to be used when generating the signature.
+# @param publickey
+#   The public key DNS record as a TXT resource record.
+# @param publickeyextended
+#   The extended public key DNS record as a TXT resource record.
+# @param privatekey
+#   The private key for signing mail.
+# @param hash_algorithms
+#   The encryption algorithm.
+# @param signaturealgorithm
+#   The signature algorithm.
+# @param minimumkeybits
+#   The restriction on the minimum bits required.
+# @param keys
+#   The array of key structures.
+# @param service_ensure
+#   The state of the service (running or stopped).
+# @param service_enable
+#   Whether the service is enabled.
+# @param service_name
+#   The name of the service.
+# @param trustanchorfile
+#   The name of the service.
+# Please see the README.md for more details.
 class opendkim (
   String                    $user                 = $opendkim::params::user,
   String                    $group                = $opendkim::params::group,

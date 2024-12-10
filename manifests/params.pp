@@ -38,14 +38,22 @@ class opendkim::params {
   $service_enable    = true
   $service_ensure    = 'running'
 
-  case $facts['os']['name'] {
-    'CentOS': {
+  case $facts['os']['family'] {
+    'Debian': {
       $user             = 'opendkim'
       $group            = 'opendkim'
       $service_name     = 'opendkim'
       $configfile       = '/etc/opendkim.conf'
       $sysconfigfile    = '/etc/default/opendkim'
       $configdir        = '/etc/opendkim'
+    }
+    'FreeBSD': {
+      $user             = 'mailnull'
+      $group            = 'mailnull'
+      $service_name     = 'milter-opendkim'
+      $configfile       = '/usr/local/etc/mail/opendkim.conf'
+      $sysconfigfile    = undef
+      $configdir        = '/usr/local/etc/mail/opendkim'
     }
     'RedHat': {
       $user             = 'opendkim'
@@ -56,7 +64,7 @@ class opendkim::params {
       $configdir        = '/etc/opendkim'
     }
     default: {
-      fail("${facts['os']['name']} is not supported by this module.")
+      fail("${facts['os']['family']} is not supported by this module.")
     }
   }
 }
