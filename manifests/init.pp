@@ -124,4 +124,9 @@ class opendkim (
   contain 'opendkim::install'
   contain 'opendkim::config'
   contain 'opendkim::service'
+
+  Class['opendkim::user']
+  -> Class['opendkim::install']
+  -> Class['opendkim::config']
+  ~> Class['opendkim::service']
 }
