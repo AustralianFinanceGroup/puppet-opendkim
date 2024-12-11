@@ -22,9 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * updated the metadata dependencies into metadata
 * anchors has been changed from the init.pp file into the contain function to overcome the warning from the validations but kept arrows to make sure the correct order to be followed.
 * OS facts has been change from debian to CentOS and RedHat.
+* opendkim psec file modified with the os based test cases .
 
 ### Removed
-* .gemfile has been removed as got an validation error that should remove the either one of them as got another gemfile. 
+* .gemfile has been removed as got an validation error that should remove the either one of them as got another gemfile.
 
 **Features**
 
