@@ -120,13 +120,8 @@ class opendkim (
   Boolean                   $service_enable       = $opendkim::params::service_enable,
   String                    $service_name         = $opendkim::params::service_name,
 )  inherits opendkim::params {
-  contain 'opendkim::user'
-  contain 'opendkim::install'
-  contain 'opendkim::config'
-  contain 'opendkim::service'
-
-  Class['opendkim::user']
-  -> Class['opendkim::install']
-  -> Class['opendkim::config']
-  ~> Class['opendkim::service']
+  class { 'opendkim::user': }
+  -> class { 'opendkim::install': }
+  -> class { 'opendkim::config': }
+  ~> class { 'opendkim::service': }
 }
