@@ -1,3 +1,6 @@
+# @summary 
+#   The Class: opendkim::params class is defining parameters for postfix mail server opendkim module 
+# == 
 class opendkim::params {
   $uid = -1
   $gid = -1
@@ -35,7 +38,7 @@ class opendkim::params {
   $service_enable    = true
   $service_ensure    = 'running'
 
-  case fact('os.family') {
+  case $facts['os']['family'] {
     'Debian': {
       $user             = 'opendkim'
       $group            = 'opendkim'
@@ -52,7 +55,7 @@ class opendkim::params {
       $sysconfigfile    = undef
       $configdir        = '/usr/local/etc/mail/opendkim'
     }
-    'Redhat': {
+    'RedHat': {
       $user             = 'opendkim'
       $group            = 'opendkim'
       $service_name     = 'opendkim'
@@ -61,7 +64,7 @@ class opendkim::params {
       $configdir        = '/etc/opendkim'
     }
     default: {
-      fail("${fact('os.family')} is not supported by this module.")
+      fail("${facts['os']['family']} is not supported by this module.")
     }
   }
 }

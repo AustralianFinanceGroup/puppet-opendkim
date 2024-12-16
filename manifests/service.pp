@@ -1,3 +1,6 @@
+# @summary 
+#   The Class: opendkim::service class is defining services for postfix mail server opendkim module 
+# == 
 class opendkim::service inherits opendkim {
   service { 'opendkim':
     ensure     => $opendkim::service_ensure,

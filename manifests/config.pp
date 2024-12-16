@@ -10,7 +10,7 @@ class opendkim::config inherits opendkim {
     }
   }
 
-  if $::osfamily == 'FreeBSD' {
+  if $facts['os']['family'] == 'FreeBSD' {
     file_line {
       default:
         path => '/etc/rc.conf',
@@ -73,7 +73,6 @@ class opendkim::config inherits opendkim {
     }
   }
 
-
   file { 'opendkim-conf':
     ensure  => 'file',
     path    => $opendkim::configfile,
@@ -83,13 +82,13 @@ class opendkim::config inherits opendkim {
     content => template('opendkim/etc/opendkim.conf.erb'),
   }
 
-  if $::osfamily == 'RedHat' {
-    file {'/etc/tmpfiles.d/opendkim.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      source  => 'puppet:///modules/opendkim/tmpfiles.d/opendkim.conf',
+  if $facts['os']['family'] == 'RedHat' {
+    file { '/etc/tmpfiles.d/opendkim.conf':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/opendkim/tmpfiles.d/opendkim.conf',
     }
   }
 
@@ -103,7 +102,6 @@ class opendkim::config inherits opendkim {
   }
 
   if $opendkim::alldomain {
-
     if($opendkim::manage_private_keys == true) {
       file { "${opendkim::configdir}/keys/${opendkim::selector}":
         ensure  => 'file',
@@ -133,9 +131,7 @@ class opendkim::config inherits opendkim {
       group   => $opendkim::group,
       mode    => '0640',
     }
-
   } else {
-
     file { 'opendkim-SigningTable':
       ensure  => 'file',
       path    => "${opendkim::configdir}/SigningTable",
@@ -156,11 +152,11 @@ class opendkim::config inherits opendkim {
 
     $opendkim::keys.each |Hash $key| {
       ensure_resource('file', "${opendkim::configdir}/keys/${key['domain']}", {
-        ensure  => 'directory',
-        recurse => true,
-        owner   => 'root',
-        group   => $opendkim::group,
-        mode    => '0710',
+          ensure  => 'directory',
+          recurse => true,
+          owner   => 'root',
+          group   => $opendkim::group,
+          mode    => '0710',
       })
 
       if($opendkim::manage_private_keys == true) {
@@ -192,9 +188,6 @@ class opendkim::config inherits opendkim {
         group   => $opendkim::group,
         mode    => '0640',
       }
-
     }
-
   }
-
 }

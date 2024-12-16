@@ -1,0 +1,56 @@
+---
+name: PDK Tests
+run-name: Testing branch ${{ github.head_ref }} by ${{ github.actor }}
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  push:
+    paths-ignore:
+      - '**.md'
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pdk-unit-test:
+    runs-on: ubuntu-latest
+    container:
+      image: puppet/pdk:${{ vars.PDK_TESTING_VERSION }}
+    env:
+      PUPPET_DEPLOY_KEY: ${{ secrets.PUPPET_DEPLOY_KEY }}
+      PDK_PUPPET_VERSION: ${{ vars.PUPPET_TESTING_VERSION }} # forces PDK to use this version without having to pass it on the command line
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install necessary apt packages
+        run: |
+          apt update
+          apt install -y build-essential jq curl
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          mkdir -p /root/.ssh
+          echo "${{ secrets.PUPPET_DEPLOY_KEY }}" > /root/.ssh/id_rsa
+          echo "Host *" > /root/.ssh/config
+          echo "  StrictHostKeyChecking no" >> /root/.ssh/config
+          echo "  IdentityFile /root/.ssh/id_rsa" >> /root/.ssh/config
+          echo "  HashKnownHosts no" >> /root/.ssh/config
+          chmod 600 /root/.ssh/id_rsa /root/.ssh/config
+
+      - name: Run PDK validate
+        run: |
+          pdk validate
+
+      - name: Run PDK unit tests
+        run: |
+          pdk test unit --parallel
